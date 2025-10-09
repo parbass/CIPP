@@ -65,12 +65,21 @@ const Page = () => {
     actions: actions,
   };
 
-  const simpleColumns = ["Name", "State", "Mode", "RuleErrorAction", "WhenChanged", "Comments"];
+  const simpleColumns = [
+    "Name",
+    "State",
+    "Mode",
+    "RuleErrorAction",
+    "WhenChanged",
+    "Comments",
+    "Tenant",
+  ];
 
   return (
     <CippTablePage
       title={pageTitle}
       apiUrl="/api/ListTransportRules"
+      apiDataKey="Results"
       actions={actions}
       offCanvas={offCanvas}
       simpleColumns={simpleColumns}
@@ -95,11 +104,18 @@ const Page = () => {
           >
             Deploy Template
           </Button>
+          <Button
+            component={Link}
+            href="/email/transport/new-rules/add"
+            startIcon={<RocketLaunch />}
+          >
+            New Transport Rule
+          </Button>
         </>
       }
     />
   );
 };
 
-Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
+Page.getLayout = (page) => <DashboardLayout allTenantsSupport={true}>{page}</DashboardLayout>;
 export default Page;
